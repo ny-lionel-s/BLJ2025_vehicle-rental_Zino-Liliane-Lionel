@@ -1,0 +1,2 @@
+public class VehicleRentalManager {
+}
