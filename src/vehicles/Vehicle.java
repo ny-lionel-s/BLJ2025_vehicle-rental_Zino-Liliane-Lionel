@@ -21,11 +21,11 @@ public abstract class Vehicle {
         this.available = available;
     }
 
-    public String getVehicleId() {
+    public UUID getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicleId(String vehicleId) {
+    public void setVehicleId(UUID vehicleId) {
         this.vehicleId = vehicleId;
     }
 

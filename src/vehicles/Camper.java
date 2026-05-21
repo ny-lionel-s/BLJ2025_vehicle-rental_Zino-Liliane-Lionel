@@ -1,10 +1,12 @@
 package vehicles;
 
+import java.util.UUID;
+
 public class Camper extends Vehicle {
     private int sleepingPlaces;
     private boolean hasKitchen;
 
-    public Camper(String vehicleId, String brand, String model, String licensePlate,
+    public Camper(UUID vehicleId, String brand, String model, String licensePlate,
                   int minDriverAge, double rentalPricePerDay, boolean available,
                   int sleepingPlaces, boolean hasKitchen) {
         super(vehicleId, brand, model, licensePlate, minDriverAge, rentalPricePerDay, available);

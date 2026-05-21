@@ -30,7 +30,7 @@ public class Contract {
     }
 
     public boolean isAgeValid(int age) {
-        return vehicle.getminDriverAge < age;
+        return vehicle.getMinDriverAge() < age;
     }
 
     public LocalDate getStartingDate() {

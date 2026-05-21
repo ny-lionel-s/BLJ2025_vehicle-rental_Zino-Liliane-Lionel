@@ -7,7 +7,7 @@ public class Person {
     private String lastName;
     private LocalDate birthYear;
 
-    public Person(UUID personId, firstName, String lastName, LocalDate birthYear) {
+    public Person(UUID personId, String firstName, String lastName, LocalDate birthYear) {
         this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;

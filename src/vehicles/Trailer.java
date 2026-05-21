@@ -1,10 +1,12 @@
 package vehicles;
 
+import java.util.UUID;
+
 public class Trailer extends Vehicle {
     private String trailerType;
     private double maxLoadKg;
 
-    public Trailer(String vehicleId, String brand, String model, String licensePlate,
+    public Trailer(UUID vehicleId, String brand, String model, String licensePlate,
                    int minDriverAge, double rentalPricePerDay, boolean available,
                    String trailerType, double maxLoadKg) {
         super(vehicleId, brand, model, licensePlate, minDriverAge, rentalPricePerDay, available);
