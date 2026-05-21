@@ -1,3 +1,5 @@
+package vehicles;
+
 import java.util.UUID;
 
 public abstract class Vehicle {

@@ -1,3 +1,5 @@
+package vehicles;
+
 public class Truck extends Vehicle {
     private double maxLoadKg;
 

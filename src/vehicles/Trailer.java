@@ -1,3 +1,5 @@
+package vehicles;
+
 public class Trailer extends Vehicle {
     private String trailerType;
     private double maxLoadKg;

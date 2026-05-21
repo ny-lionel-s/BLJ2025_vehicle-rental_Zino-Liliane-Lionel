@@ -1,6 +1,7 @@
 import Exceptions.DenylistedPersonException;
 import Exceptions.LeaseLengthCollisionException;
 import Exceptions.MinorAgeException;
+import vehicles.Vehicle;
 
 import java.time.LocalDate;
 

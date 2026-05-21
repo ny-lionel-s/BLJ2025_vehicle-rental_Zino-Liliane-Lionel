@@ -1,3 +1,5 @@
+package vehicles;
+
 public class Camper extends Vehicle {
     private int sleepingPlaces;
     private boolean hasKitchen;
