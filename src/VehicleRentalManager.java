@@ -137,10 +137,10 @@ public class VehicleRentalManager {
     }
 
     private String formatPerson(Person person) {
-        return person.getPersonId() + " | " +
-                person.getLastName() + " | " +
-                person.getFirstName() + " | " +
-                person.getBirthYear();
+        return "ID: " + person.getPersonId() + " | " +
+                "Last Name: " + person.getLastName() + " | " +
+                "First Name: " + person.getFirstName() + " | " +
+                "Birthday: " + person.getBirthYear();
     }
 
     private String formatVehicle(Vehicle vehicle) {
