@@ -3,6 +3,7 @@ import Exceptions.LeaseLengthCollisionException;
 import Exceptions.MinorAgeException;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Contract {
     LocalDate startingDate;
@@ -12,11 +13,12 @@ public class Contract {
 
 
     public Contract(LocalDate startingDate, LocalDate endingDate, Person person, Vehicle vehicle) throws Exception {
-        if () {//check age
+        int age = Period.between(person.getBirthYear(), LocalDate.now()).getYears();
+        if (isAgeValid(age)) {
             throw new MinorAgeException("You need to be older for this vehicle");
         } else if () {//check lease length
             throw new LeaseLengthCollisionException("You broke the contract length");
-        } else if () {
+        } else if () {//check if person is in denyed list
             throw new DenylistedPersonException("You are on the denyed List");
         } else {
             this.startingDate = startingDate;
@@ -24,6 +26,10 @@ public class Contract {
             this.person = person;
             this.vehicle = vehicle;
         }
+    }
+
+    public boolean isAgeValid(int age) {
+        return vehicle.getminDriverAge < age;
     }
 
     public LocalDate getStartingDate() {
