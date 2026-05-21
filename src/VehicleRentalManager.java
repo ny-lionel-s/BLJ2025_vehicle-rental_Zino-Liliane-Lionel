@@ -1,19 +1,17 @@
-import vehicles.Vehicle;
-import vehicles.Car;
 import vehicles.Camper;
+import vehicles.Car;
 import vehicles.Trailer;
 import vehicles.Truck;
+import vehicles.Vehicle;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.UUID;
 
-public class    VehicleRentalManager {
+public class VehicleRentalManager {
     private final ArrayList<Person> customerList;
     private final ArrayList<Person> denyList;
     private final ArrayList<Vehicle> vehicles;
     private final ArrayList<Contract> contracts;
-
 
     public VehicleRentalManager() {
         customerList = new ArrayList<>();
@@ -22,54 +20,119 @@ public class    VehicleRentalManager {
         contracts = new ArrayList<>();
     }
 
-    void addPersonToDenylist(Person p) {
-        denyList.add(p);
-    }
-
-    void createContract(LocalDate startingDate, LocalDate endingDate, Person person, Vehicle vehicle) {
-        try {
-            contracts.add(new Contract(startingDate,endingDate,person,vehicle));
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
     void createPerson(String firstName, String lastName, LocalDate birthYear) {
         customerList.add(new Person(firstName, lastName, birthYear));
     }
 
+    void addPersonToCustomerList(Person p) {
+        customerList.add(p);
+    }
+
+    void removePersonFromCustomerList(Person p) {
+        customerList.remove(p);
+    }
+
+    void addPersonToDenylist(Person p) {
+        p.setDenylisted(true);
+        if (!denyList.contains(p)) {
+            denyList.add(p);
+        }
+    }
+
+    void removePersonFromDenylist(Person p) {
+        p.setDenylisted(false);
+        denyList.remove(p);
+    }
+
     void createCamper(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, int sleepingPlaces, boolean hasKitchen) {
-        vehicles.add(new Camper(brand,model,licensePlate,minDriverAge,rentalPricePerDay,available,sleepingPlaces,hasKitchen));
+        vehicles.add(new Camper(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, sleepingPlaces, hasKitchen));
     }
 
     void createCar(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, int numberOfSeats, boolean automaticTransmission) {
-        vehicles.add(new Car(brand,model,licensePlate,minDriverAge,rentalPricePerDay,available,numberOfSeats,automaticTransmission));
+        vehicles.add(new Car(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, numberOfSeats, automaticTransmission));
     }
 
     void createTrailer(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, String trailerType, double maxLoadKg) {
-        vehicles.add(new Trailer(brand,model,licensePlate,minDriverAge,rentalPricePerDay,available,trailerType,maxLoadKg));
+        vehicles.add(new Trailer(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, trailerType, maxLoadKg));
     }
 
     void createTruck(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, double maxLoadKg) {
-        vehicles.add(new Truck(brand,model,licensePlate,minDriverAge,rentalPricePerDay,available,maxLoadKg));
+        vehicles.add(new Truck(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, maxLoadKg));
     }
 
+    void addVehicleToVehicles(Vehicle v) {
+        vehicles.add(v);
+    }
+
+    void removeVehicleFromVehicles(Vehicle v) {
+        for (Contract c : contracts) {
+            if (c.getVehicle().equals(v)) {
+                System.out.println("Cannot remove vehicle - it is used in an active contract.");
+                return;
+            }
+        }
+        vehicles.remove(v);
+    }
+
+    Contract createContract(LocalDate startingDate, LocalDate endingDate, Person person, Vehicle vehicle) throws Exception {
+        if (hasLeaseCollision(vehicle, startingDate, endingDate)) {
+            throw new Exceptions.LeaseLengthCollisionException("Vehicle is already rented during this period.");
+        }
+        Contract contract = new Contract(startingDate, endingDate, person, vehicle);
+        contracts.add(contract);
+        return contract;
+    }
+
+    private boolean hasLeaseCollision(Vehicle vehicle, LocalDate start, LocalDate end) {
+        for (Contract c : contracts) {
+            if (c.getVehicle().equals(vehicle) && c.getStartingDate().isBefore(end) && c.getEndingDate().isAfter(start)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    void removeContract(Contract c) {
+        contracts.remove(c);
+    }
 
     void printCustomerList() {
+        if (customerList.isEmpty()) {
+            System.out.println("No customers registered.");
+            return;
+        }
         for (int i = 0; i < customerList.size(); i++) {
-            System.out.println(formatPerson(customerList.get(i)));
+            System.out.println(i + ": " + formatPerson(customerList.get(i)));
+        }
+    }
+
+    void printDenyList() {
+        if (denyList.isEmpty()) {
+            System.out.println("Denylist is empty.");
+            return;
+        }
+        for (int i = 0; i < denyList.size(); i++) {
+            System.out.println(i + ": " + formatPerson(denyList.get(i)));
         }
     }
 
     void printVehicles() {
+        if (vehicles.isEmpty()) {
+            System.out.println("No vehicles registered.");
+            return;
+        }
         for (int i = 0; i < vehicles.size(); i++) {
-            System.out.println(formatVehicle(vehicles.get(i)));
+            System.out.println(i + ": " + formatVehicle(vehicles.get(i)));
         }
     }
 
     void printContractList() {
+        if (contracts.isEmpty()) {
+            System.out.println("No contracts registered.");
+            return;
+        }
         for (int i = 0; i < contracts.size(); i++) {
-            System.out.println(formatContract(contracts.get(i)));
+            System.out.println(i + ": " + formatContract(contracts.get(i)));
         }
     }
 
@@ -81,7 +144,7 @@ public class    VehicleRentalManager {
     }
 
     private String formatVehicle(Vehicle vehicle) {
-        String vehicleStats = vehicle.getVehicleId() + " | " +
+        String s = vehicle.getVehicleId() + " | " +
                 vehicle.getClass().getSimpleName() + " | " +
                 vehicle.getBrand() + " | " +
                 vehicle.getModel() + " | " +
@@ -90,21 +153,12 @@ public class    VehicleRentalManager {
                 vehicle.getRentalPricePerDay() + " | " +
                 vehicle.isAvailable();
 
-        if (vehicle instanceof Car) {
-            Car car = (Car) vehicle;
-            return vehicleStats + " | " + car.getNumberOfSeats();
-        } else if (vehicle instanceof Camper) {
-            Camper camper = (Camper) vehicle;
-            return vehicleStats + " | " + camper.getSleepingPlaces() + " | " + camper.isHasKitchen();
-        } else if (vehicle instanceof Trailer) {
-            Trailer trailer = (Trailer) vehicle;
-            return vehicleStats + " | " + trailer.getTrailerType() + " | " + trailer.getMaxLoadKg();
-        } else if (vehicle instanceof Truck) {
-            Truck truck = (Truck) vehicle;
-            return vehicleStats + " | " + truck.getMaxLoadKg();
-        }
+        if (vehicle instanceof Car car) return s + " | " + car.getNumberOfSeats();
+        if (vehicle instanceof Camper camper) return s + " | " + camper.getSleepingPlaces() + " | " + camper.isHasKitchen();
+        if (vehicle instanceof Trailer trailer) return s + " | " + trailer.getTrailerType() + " | " + trailer.getMaxLoadKg();
+        if (vehicle instanceof Truck truck) return s + " | " + truck.getMaxLoadKg();
 
-        return vehicleStats;
+        return s;
     }
 
     private String formatContract(Contract contract) {
@@ -113,7 +167,6 @@ public class    VehicleRentalManager {
                 formatPerson(contract.getPerson()) + " | " +
                 formatVehicle(contract.getVehicle());
     }
-
 
     public ArrayList<Person> getCustomerList() {
         return customerList;

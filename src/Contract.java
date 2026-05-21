@@ -16,10 +16,10 @@ public class Contract {
     public Contract(LocalDate startingDate, LocalDate endingDate, Person person, Vehicle vehicle) throws Exception {
         int age = Period.between(person.getBirthYear(), LocalDate.now()).getYears();
 
-        if (isUnderage(age)) {
+        if (isUnderage(age, vehicle)) {
             throw new MinorAgeException("You need to be older for this vehicle");
 
-        } else if (!isLeaseLengthValid(startingDate, endingDate)) {
+        } else if (!isLeaseLengthValid(startingDate, endingDate, vehicle)) {
             throw new LeaseLengthCollisionException("You broke the contract length");
 
         } else if (person.isDenylisted()) {
@@ -33,17 +33,17 @@ public class Contract {
         }
     }
 
-    public boolean isUnderage(int age) {
+    public boolean isUnderage(int age, Vehicle vehicle) {
         return age < vehicle.getMinDriverAge();
     }
 
 
-    public boolean isLeaseLengthValid(LocalDate startingDate, LocalDate endingDate) {
+    public boolean isLeaseLengthValid(LocalDate startingDate, LocalDate endingDate, Vehicle vehicle) {
         if (endingDate.isBefore(startingDate) || endingDate.isEqual(startingDate)) {
             return false;
         }
-        long months = ChronoUnit.MONTHS.between(startingDate, endingDate);
-        return months <= vehicle.getMaxLeaseMonths();
+        long days = ChronoUnit.DAYS.between(startingDate, endingDate);
+        return days <= vehicle.getMaxLeaseDays();
     }
 
 

@@ -10,6 +10,7 @@ public abstract class Vehicle {
     private int minDriverAge;
     private double rentalPricePerDay;
     private boolean available;
+    private int maxLeaseDays;
 
     public Vehicle(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available) {
         this.vehicleId = UUID.randomUUID();
@@ -19,6 +20,16 @@ public abstract class Vehicle {
         this.minDriverAge = minDriverAge;
         this.rentalPricePerDay = rentalPricePerDay;
         this.available = available;
+    }
+
+
+
+    public int getMaxLeaseDays() {
+        return maxLeaseDays;
+    }
+
+    public void setMaxLeaseDays(int maxLeaseDays) {
+        this.maxLeaseDays = maxLeaseDays;
     }
 
     public UUID getVehicleId() {
@@ -79,14 +90,8 @@ public abstract class Vehicle {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName() + "{" +
-                "vehicleId='" + vehicleId + '\'' +
-                ", brand='" + brand + '\'' +
-                ", model='" + model + '\'' +
-                ", licensePlate='" + licensePlate + '\'' +
-                ", minDriverAge=" + minDriverAge +
-                ", rentalPricePerDay=" + rentalPricePerDay +
-                ", available=" + available +
-                '}';
+        return getClass().getSimpleName() + "{" + "vehicleId='" + vehicleId + '\'' + ", brand='" + brand + '\'' + ", model='" + model + '\'' + ", licensePlate='" + licensePlate + '\'' + ", minDriverAge=" + minDriverAge + ", rentalPricePerDay=" + rentalPricePerDay + ", available=" + available + '}';
     }
+
+
 }
