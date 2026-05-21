@@ -1,11 +1,14 @@
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Person {
+    private UUID personId;
     private String firstName;
     private String lastName;
     private LocalDate birthYear;
 
-    public Person(String firstName, String lastName, LocalDate birthYear) {
+    public Person(UUID personId, firstName, String lastName, LocalDate birthYear) {
+        this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthYear = birthYear;

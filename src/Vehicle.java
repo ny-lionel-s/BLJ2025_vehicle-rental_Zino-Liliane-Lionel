@@ -1,5 +1,7 @@
+import java.util.UUID;
+
 public abstract class Vehicle {
-    private String vehicleId;
+    private UUID vehicleId;
     private String brand;
     private String model;
     private String licensePlate;
@@ -7,8 +9,7 @@ public abstract class Vehicle {
     private double rentalPricePerDay;
     private boolean available;
 
-    public Vehicle(String vehicleId, String brand, String model, String licensePlate,
-                   int minDriverAge, double rentalPricePerDay, boolean available) {
+    public Vehicle(UUID vehicleId, String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available) {
         this.vehicleId = vehicleId;
         this.brand = brand;
         this.model = model;
