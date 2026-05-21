@@ -6,12 +6,14 @@ public class Person {
     private String firstName;
     private String lastName;
     private LocalDate birthYear;
+    private boolean denylisted;
 
-    public Person(UUID personId, String firstName, String lastName, LocalDate birthYear) {
-        this.personId = personId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthYear = birthYear;
+    public Person(UUID personId, String firstName, String lastName, LocalDate birthYear, boolean denylisted) {
+        this.personId   = personId;
+        this.firstName  = firstName;
+        this.lastName   = lastName;
+        this.birthYear  = birthYear;
+        this.denylisted = denylisted;
     }
 
     public UUID getPersonId() {
@@ -46,12 +48,21 @@ public class Person {
         this.birthYear = birthYear;
     }
 
+    public boolean isDenylisted() {
+        return this.denylisted;
+    }
+
+    public void setDenylisted(boolean denylisted) {
+        this.denylisted = denylisted;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthYear=" + birthYear +
+                ", denylisted=" + denylisted +
                 '}';
     }
 }

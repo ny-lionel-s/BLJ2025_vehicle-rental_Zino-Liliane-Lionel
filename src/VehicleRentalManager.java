@@ -6,7 +6,7 @@ import vehicles.Truck;
 
 import java.util.ArrayList;
 
-public class VehicleRentalManager {
+public class    VehicleRentalManager {
     private final ArrayList<Person> customerList;
     private final ArrayList<Person> denyList;
     private final ArrayList<Vehicle> vehicles;
