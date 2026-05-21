@@ -5,6 +5,7 @@ import vehicles.Vehicle;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 
 public class Contract {
     LocalDate startingDate;
@@ -12,26 +13,40 @@ public class Contract {
     Person person;
     Vehicle vehicle;
 
-
     public Contract(LocalDate startingDate, LocalDate endingDate, Person person, Vehicle vehicle) throws Exception {
         int age = Period.between(person.getBirthYear(), LocalDate.now()).getYears();
-        if (isAgeValid(age)) {
+
+        if (isUnderage(age)) {
             throw new MinorAgeException("You need to be older for this vehicle");
-        } else if () {//check lease length
+
+        } else if (!isLeaseLengthValid(startingDate, endingDate)) {
             throw new LeaseLengthCollisionException("You broke the contract length");
-        } else if () {//check if person is in denyed list
+
+        } else if (person.isDenylisted()) {
             throw new DenylistedPersonException("You are on the denyed List");
+
         } else {
             this.startingDate = startingDate;
-            this.endingDate = endingDate;
-            this.person = person;
-            this.vehicle = vehicle;
+            this.endingDate   = endingDate;
+            this.person       = person;
+            this.vehicle      = vehicle;
         }
     }
 
-    public boolean isAgeValid(int age) {
-        return vehicle.getMinDriverAge() < age;
+    public boolean isUnderage(int age) {
+        return age < vehicle.getMinDriverAge();
     }
+
+
+    public boolean isLeaseLengthValid(LocalDate startingDate, LocalDate endingDate) {
+        if (endingDate.isBefore(startingDate) || endingDate.isEqual(startingDate)) {
+            return false;
+        }
+        long months = ChronoUnit.MONTHS.between(startingDate, endingDate);
+        return months <= vehicle.getMaxLeaseMonths();
+    }
+
+
 
     public LocalDate getStartingDate() {
         return startingDate;

@@ -6,12 +6,24 @@ public class Person {
     private String firstName;
     private String lastName;
     private LocalDate birthYear;
+    private boolean denylisted;
 
+    // Your teammate's constructor (UUID auto-generated, not denylisted by default)
     public Person(String firstName, String lastName, LocalDate birthYear) {
-        this.personId = UUID.randomUUID();
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthYear = birthYear;
+        this.personId   = UUID.randomUUID();
+        this.firstName  = firstName;
+        this.lastName   = lastName;
+        this.birthYear  = birthYear;
+        this.denylisted = false;
+    }
+
+    // Your constructor (full control over UUID and denylist status)
+    public Person(UUID personId, String firstName, String lastName, LocalDate birthYear, boolean denylisted) {
+        this.personId   = personId;
+        this.firstName  = firstName;
+        this.lastName   = lastName;
+        this.birthYear  = birthYear;
+        this.denylisted = denylisted;
     }
 
     public UUID getPersonId() {
@@ -46,12 +58,21 @@ public class Person {
         this.birthYear = birthYear;
     }
 
+    public boolean isDenylisted() {
+        return this.denylisted;
+    }
+
+    public void setDenylisted(boolean denylisted) {
+        this.denylisted = denylisted;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
                 "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", birthYear=" + birthYear +
+                ", denylisted=" + denylisted +
                 '}';
     }
 }

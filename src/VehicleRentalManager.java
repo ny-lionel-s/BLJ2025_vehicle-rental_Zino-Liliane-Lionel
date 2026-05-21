@@ -8,7 +8,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.UUID;
 
-public class VehicleRentalManager {
+public class    VehicleRentalManager {
     private final ArrayList<Person> customerList;
     private final ArrayList<Person> denyList;
     private final ArrayList<Vehicle> vehicles;
