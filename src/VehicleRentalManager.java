@@ -1,4 +1,8 @@
 import vehicles.Vehicle;
+import vehicles.Car;
+import vehicles.Camper;
+import vehicles.Trailer;
+import vehicles.Truck;
 
 import java.util.ArrayList;
 
@@ -35,26 +39,61 @@ public class VehicleRentalManager {
 
     void printCustomerList() {
         for (int i = 0; i < customerList.size(); i++) {
-            System.out.println(customerList.get(i).getLastName());
-            System.out.println(customerList.get(i).getFirstName());
-            System.out.println(customerList.get(i).getBirthYear());
+            System.out.println(formatPerson(customerList.get(i)));
         }
     }
 
     void printVehicles() {
         for (int i = 0; i < vehicles.size(); i++) {
-            System.out.println(vehicles.get(i).getLastName());
-            System.out.println(vehicles.get(i).getFirstName());
-            System.out.println(vehicles.get(i).getBirthYear());
+            System.out.println(formatVehicle(vehicles.get(i)));
         }
     }
 
     void printContractList() {
         for (int i = 0; i < contracts.size(); i++) {
-            System.out.println(contracts.get(i).getLastName());
-            System.out.println(contracts.get(i).getFirstName());
-            System.out.println(contracts.get(i).getBirthYear());
+            System.out.println(formatContract(contracts.get(i)));
         }
+    }
+
+    private String formatPerson(Person person) {
+        return person.getPersonId() + " | " +
+                person.getLastName() + " | " +
+                person.getFirstName() + " | " +
+                person.getBirthYear();
+    }
+
+    private String formatVehicle(Vehicle vehicle) {
+        String vehicleStats = vehicle.getVehicleId() + " | " +
+                vehicle.getClass().getSimpleName() + " | " +
+                vehicle.getBrand() + " | " +
+                vehicle.getModel() + " | " +
+                vehicle.getLicensePlate() + " | " +
+                vehicle.getMinDriverAge() + " | " +
+                vehicle.getRentalPricePerDay() + " | " +
+                vehicle.isAvailable();
+
+        if (vehicle instanceof Car) {
+            Car car = (Car) vehicle;
+            return vehicleStats + " | " + car.getNumberOfSeats();
+        } else if (vehicle instanceof Camper) {
+            Camper camper = (Camper) vehicle;
+            return vehicleStats + " | " + camper.getSleepingPlaces() + " | " + camper.isHasKitchen();
+        } else if (vehicle instanceof Trailer) {
+            Trailer trailer = (Trailer) vehicle;
+            return vehicleStats + " | " + trailer.getTrailerType() + " | " + trailer.getMaxLoadKg();
+        } else if (vehicle instanceof Truck) {
+            Truck truck = (Truck) vehicle;
+            return vehicleStats + " | " + truck.getMaxLoadKg();
+        }
+
+        return vehicleStats;
+    }
+
+    private String formatContract(Contract contract) {
+        return contract.getStartingDate() + " | " +
+                contract.getEndingDate() + " | " +
+                formatPerson(contract.getPerson()) + " | " +
+                formatVehicle(contract.getVehicle());
     }
 
 

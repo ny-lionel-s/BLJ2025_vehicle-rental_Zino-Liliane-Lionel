@@ -14,6 +14,14 @@ public class Person {
         this.birthYear = birthYear;
     }
 
+    public UUID getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(UUID personId) {
+        this.personId = personId;
+    }
+
     public String getFirstName() {
         return firstName;
     }
