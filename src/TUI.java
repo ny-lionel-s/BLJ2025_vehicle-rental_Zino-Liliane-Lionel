@@ -26,7 +26,7 @@ public class TUI {
         boolean running = true;
         while (running) {
             System.out.println("\n--- Main Menu ---");
-            System.out.println("1. Manage Persons");
+            System.out.println("1. Manage People");
             System.out.println("2. Manage Vehicles");
             System.out.println("3. Manage Contracts");
             System.out.println("4. Manage Denylist");
@@ -46,7 +46,7 @@ public class TUI {
     private void personMenu() {
         System.out.println("\n--- Person Menu ---");
         System.out.println("1. Add Person");
-        System.out.println("2. List all Persons");
+        System.out.println("2. List all People");
         System.out.println("3. Remove Person");
         System.out.print("Choice: ");
         switch (scanner.nextLine().trim()) {
@@ -207,7 +207,7 @@ public class TUI {
     private void createContract() {
         manager.printCustomerList();
         ArrayList<Person> persons = manager.getCustomerList();
-        if (persons.isEmpty()) { System.out.println("No persons available."); return; }
+        if (persons.isEmpty()) { System.out.println("No person available."); return; }
         System.out.print("Select person index: ");
         Person person;
         try {
@@ -274,7 +274,7 @@ public class TUI {
         manager.printCustomerList();
         ArrayList<Person> list = manager.getCustomerList();
         if (list.isEmpty()) return;
-        System.out.print("Select person index: ");
+        System.out.print("Select index of person: ");
         try {
             Person p = list.get(Integer.parseInt(scanner.nextLine().trim()));
             manager.addPersonToDenylist(p);
