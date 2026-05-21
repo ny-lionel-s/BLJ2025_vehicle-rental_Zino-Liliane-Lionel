@@ -22,37 +22,38 @@ public class VehicleRentalManager {
         contracts = new ArrayList<>();
     }
 
-
     void addPersonToDenylist(Person p) {
         denyList.add(p);
     }
 
-    void createContract() {
-
+    void createContract(LocalDate startingDate, LocalDate endingDate, Person person, Vehicle vehicle) {
+        try {
+            contracts.add(new Contract(startingDate,endingDate,person,vehicle));
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     void createPerson(String firstName, String lastName, LocalDate birthYear) {
-        customerList.add(new Person(firstName,lastName,birthYear));
+        customerList.add(new Person(firstName, lastName, birthYear));
     }
 
-    void createVehicle(int whatVehicle) {
-        switch (whatVehicle){
-            case 1:
-                vehicles.add(new Camper());
-                break;
-            case 2:
-                vehicles.add(new Car());
-                break;
-            case 3:
-                vehicles.add(new Trailer());
-                break;
-            case 4:
-                vehicles.add(new Truck());
-                break;
-            default:
-                System.out.println("No such vehicle found");
-        }
+    void createCamper(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, int sleepingPlaces, boolean hasKitchen) {
+        vehicles.add(new Camper(brand,model,licensePlate,minDriverAge,rentalPricePerDay,available,sleepingPlaces,hasKitchen));
     }
+
+    void createCar(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, int numberOfSeats, boolean automaticTransmission) {
+        vehicles.add(new Car(brand,model,licensePlate,minDriverAge,rentalPricePerDay,available,numberOfSeats,automaticTransmission));
+    }
+
+    void createTrailer(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, String trailerType, double maxLoadKg) {
+        vehicles.add(new Trailer(brand,model,licensePlate,minDriverAge,rentalPricePerDay,available,trailerType,maxLoadKg));
+    }
+
+    void createTruck(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, double maxLoadKg) {
+        vehicles.add(new Truck(brand,model,licensePlate,minDriverAge,rentalPricePerDay,available,maxLoadKg));
+    }
+
 
     void printCustomerList() {
         for (int i = 0; i < customerList.size(); i++) {
