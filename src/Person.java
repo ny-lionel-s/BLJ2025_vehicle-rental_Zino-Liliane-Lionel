@@ -8,6 +8,16 @@ public class Person {
     private LocalDate birthYear;
     private boolean denylisted;
 
+    // Your teammate's constructor (UUID auto-generated, not denylisted by default)
+    public Person(String firstName, String lastName, LocalDate birthYear) {
+        this.personId   = UUID.randomUUID();
+        this.firstName  = firstName;
+        this.lastName   = lastName;
+        this.birthYear  = birthYear;
+        this.denylisted = false;
+    }
+
+    // Your constructor (full control over UUID and denylist status)
     public Person(UUID personId, String firstName, String lastName, LocalDate birthYear, boolean denylisted) {
         this.personId   = personId;
         this.firstName  = firstName;
