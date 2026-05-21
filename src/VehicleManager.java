@@ -50,4 +50,16 @@ public class VehicleManager {
         existingVehicle.setRentalPricePerDay(updatedVehicle.getRentalPricePerDay());
         existingVehicle.setAvailable(updatedVehicle.isAvailable());
     }
+
+    public void deleteVehicle(String vehicleId) {
+        Iterator<Vehicle> iterator = vehicles.iterator();
+        while (iterator.hasNext()) {
+            Vehicle vehicle = iterator.next();
+            if (vehicle.getVehicleId().equals(vehicleId)) {
+                iterator.remove();
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Fahrzeug nicht gefunden.");
+    }
 }
