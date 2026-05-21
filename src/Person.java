@@ -7,8 +7,8 @@ public class Person {
     private String lastName;
     private LocalDate birthYear;
 
-    public Person(UUID personId, String firstName, String lastName, LocalDate birthYear) {
-        this.personId = personId;
+    public Person(String firstName, String lastName, LocalDate birthYear) {
+        this.personId = UUID.randomUUID();
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthYear = birthYear;

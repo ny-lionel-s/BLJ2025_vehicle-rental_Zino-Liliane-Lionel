@@ -4,7 +4,9 @@ import vehicles.Camper;
 import vehicles.Trailer;
 import vehicles.Truck;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class VehicleRentalManager {
     private final ArrayList<Person> customerList;
@@ -29,12 +31,27 @@ public class VehicleRentalManager {
 
     }
 
-    void addPersonToCustomerList(Person p) {
-        customerList.add(p);
+    void createPerson(String firstName, String lastName, LocalDate birthYear) {
+        customerList.add(new Person(firstName,lastName,birthYear));
     }
 
-    void addVehicleToVehicles(Vehicle v) {
-        vehicles.add(v);
+    void createVehicle(int whatVehicle) {
+        switch (whatVehicle){
+            case 1:
+                vehicles.add(new Camper());
+                break;
+            case 2:
+                vehicles.add(new Car());
+                break;
+            case 3:
+                vehicles.add(new Trailer());
+                break;
+            case 4:
+                vehicles.add(new Truck());
+                break;
+            default:
+                System.out.println("No such vehicle found");
+        }
     }
 
     void printCustomerList() {

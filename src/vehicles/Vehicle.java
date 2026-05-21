@@ -11,8 +11,8 @@ public abstract class Vehicle {
     private double rentalPricePerDay;
     private boolean available;
 
-    public Vehicle(UUID vehicleId, String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available) {
-        this.vehicleId = vehicleId;
+    public Vehicle(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available) {
+        this.vehicleId = UUID.randomUUID();
         this.brand = brand;
         this.model = model;
         this.licensePlate = licensePlate;
