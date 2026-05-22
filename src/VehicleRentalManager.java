@@ -51,9 +51,6 @@ public class VehicleRentalManager {
         vehicles.add(new Trailer("Böckmann", "Tieflader", "ZH4003", 18, 45.0, true, "Velos", 750.0));
     }
 
-    void createPerson(String firstName, String lastName, LocalDate birthYear) {
-        customerList.add(new Person(firstName, lastName, birthYear));
-    }
 
     void addPersonToCustomerList(Person p) {
         customerList.add(p);
@@ -73,26 +70,6 @@ public class VehicleRentalManager {
     void removePersonFromDenylist(Person p) {
         p.setDenylisted(false);
         denyList.remove(p);
-    }
-
-    void createCamper(String brand, String model, String licensePlate, int minDriverAge,
-                      double rentalPricePerDay, boolean available, int sleepingPlaces, boolean hasKitchen) {
-        vehicles.add(new Camper(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, sleepingPlaces, hasKitchen));
-    }
-
-    void createCar(String brand, String model, String licensePlate, int minDriverAge,
-                   double rentalPricePerDay, boolean available, int numberOfSeats, boolean automaticTransmission) {
-        vehicles.add(new LuxuryCar(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, numberOfSeats, automaticTransmission));
-    }
-
-    void createTrailer(String brand, String model, String licensePlate, int minDriverAge,
-                       double rentalPricePerDay, boolean available, String trailerType, double maxLoadKg) {
-        vehicles.add(new Trailer(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, trailerType, maxLoadKg));
-    }
-
-    void createTruck(String brand, String model, String licensePlate, int minDriverAge,
-                     double rentalPricePerDay, boolean available, double maxLoadKg) {
-        vehicles.add(new Truck(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, maxLoadKg));
     }
 
     void addVehicleToVehicles(Vehicle v) {
