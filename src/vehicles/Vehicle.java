@@ -2,7 +2,7 @@ package vehicles;
 
 import java.util.UUID;
 
-public abstract class Vehicle {
+public class Vehicle {
     private UUID vehicleId;
     private String brand;
     private String model;
