@@ -317,10 +317,11 @@ public class TUI {
 
     private LocalDate promptDate(String prompt) {
         System.out.print(prompt);
+        String input = scanner.nextLine().trim();
         try {
-            return LocalDate.parse(scanner.nextLine().trim());
+            return LocalDate.parse(input);
         } catch (DateTimeParseException e) {
-            System.out.println("Invalid date. Use YYYY-MM-DD.");
+            System.out.println("Invalid date: " + input + ". Use a real calendar date in YYYY-MM-DD (month 01-12, valid day for that month).");
             return null;
         }
     }
