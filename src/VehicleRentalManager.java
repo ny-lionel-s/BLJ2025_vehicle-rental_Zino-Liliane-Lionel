@@ -1,5 +1,5 @@
 import vehicles.Camper;
-import vehicles.Car;
+import vehicles.LuxuryCar;
 import vehicles.Trailer;
 import vehicles.Truck;
 import vehicles.Vehicle;
@@ -49,7 +49,7 @@ public class VehicleRentalManager {
     }
 
     void createCar(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, int numberOfSeats, boolean automaticTransmission) {
-        vehicles.add(new Car(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, numberOfSeats, automaticTransmission));
+        vehicles.add(new LuxuryCar(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, numberOfSeats, automaticTransmission));
     }
 
     void createTrailer(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, String trailerType, double maxLoadKg) {
@@ -153,7 +153,7 @@ public class VehicleRentalManager {
                 vehicle.getRentalPricePerDay() + " | " +
                 vehicle.isAvailable();
 
-        if (vehicle instanceof Car car) return s + " | " + car.getNumberOfSeats();
+        if (vehicle instanceof LuxuryCar car) return s + " | " + car.getNumberOfSeats();
         if (vehicle instanceof Camper camper) return s + " | " + camper.getSleepingPlaces() + " | " + camper.isHasKitchen();
         if (vehicle instanceof Trailer trailer) return s + " | " + trailer.getTrailerType() + " | " + trailer.getMaxLoadKg();
         if (vehicle instanceof Truck truck) return s + " | " + truck.getMaxLoadKg();

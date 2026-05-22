@@ -1,8 +1,9 @@
 import vehicles.Vehicle;
-import vehicles.Car;
+import vehicles.LuxuryCar;
 import vehicles.Camper;
 import vehicles.Trailer;
 import vehicles.Truck;
+import vehicles.SmallCar;
 import Exceptions.DenylistedPersonException;
 import Exceptions.LeaseLengthCollisionException;
 import Exceptions.MinorAgeException;
@@ -85,32 +86,35 @@ public class TUI {
 
     private void vehicleMenu() {
         System.out.println("\n--- Vehicle Menu ---");
-        System.out.println("1. Add Car");
+        System.out.println("1. Add Luxury Car");
         System.out.println("2. Add Camper");
         System.out.println("3. Add Trailer");
         System.out.println("4. Add Truck");
-        System.out.println("5. List all Vehicles");
-        System.out.println("6. Remove Vehicle");
+        System.out.println("5. Add Small Car");
+
+        System.out.println("6. List all Vehicles");
+        System.out.println("7. Remove Vehicle");
         System.out.print("Choice: ");
         switch (scanner.nextLine().trim()) {
-            case "1" -> addCar();
+            case "1" -> addLuxuryCar();
             case "2" -> addCamper();
             case "3" -> addTrailer();
             case "4" -> addTruck();
-            case "5" -> manager.printVehicles();
-            case "6" -> removeVehicle();
+            case "5" -> addSmallCar();
+            case "6" -> manager.printVehicles();
+            case "7" -> removeVehicle();
             default  -> System.out.println("Invalid input.");
         }
     }
 
-    private void addCar() {
+    private void addLuxuryCar() {
         String[] base = promptBaseVehicle();
         if (base == null) return;
         System.out.print("Number of seats: ");
         int seats = parseInt(scanner.nextLine().trim(), 5);
         System.out.print("Automatic transmission? (true/false): ");
         boolean automatic = Boolean.parseBoolean(scanner.nextLine().trim());
-        Car car = new Car(base[0], base[1], base[2],
+        LuxuryCar car = new LuxuryCar(base[0], base[1], base[2],
                 parseInt(base[3], 18), parseDouble(base[4], 50.0),
                 true, seats, automatic);
         car.setMaxLeaseDays(parseInt(base[5], 30));
@@ -159,6 +163,19 @@ public class TUI {
         truck.setMaxLeaseDays(parseInt(base[5], 30));
         manager.addVehicleToVehicles(truck);
         System.out.println("Truck added: " + truck);
+    }
+
+    private void addSmallCar() {
+        String[] base = promptBaseVehicle();
+        if (base == null) return;
+        System.out.print("Number of seats: ");
+        int seats = parseInt(scanner.nextLine().trim(), 4);
+        SmallCar car = new SmallCar(base[0], base[1], base[2],
+                parseInt(base[3], 21), parseDouble(base[4], 120.0),
+                true, seats, false);
+        car.setMaxLeaseDays(parseInt(base[5], 30));
+        manager.addVehicleToVehicles(car);
+        System.out.println("Small car added: " + car);
     }
 
     private String[] promptBaseVehicle() {
