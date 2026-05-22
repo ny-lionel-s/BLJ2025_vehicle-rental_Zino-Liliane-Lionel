@@ -158,28 +158,28 @@ public class VehicleRentalManager {
     }
 
     private String formatVehicle(Vehicle vehicle) {
-        String s = vehicle.getVehicleId() + " | " +
-                vehicle.getClass().getSimpleName() + " | " +
-                vehicle.getBrand() + " | " +
-                vehicle.getModel() + " | " +
-                vehicle.getLicensePlate() + " | " +
-                vehicle.getMinDriverAge() + " | " +
-                vehicle.getRentalPricePerDay() + " | " +
-                vehicle.isAvailable();
+        String s = "ID: " + vehicle.getVehicleId() + " | " +
+                "Name: " + vehicle.getClass().getSimpleName() + " | " +
+                "Brand: " + vehicle.getBrand() + " | " +
+                "Model: " + vehicle.getModel() + " | " +
+                "License Plate: " + vehicle.getLicensePlate() + " | " +
+                "Driver Age: " + vehicle.getMinDriverAge() + " | " +
+                "Price: " + vehicle.getRentalPricePerDay() + " | " +
+                "Availability: " + vehicle.isAvailable();
 
-        if (vehicle instanceof LuxuryCar car) return s + " | " + car.getNumberOfSeats();
-        if (vehicle instanceof Camper camper) return s + " | " + camper.getSleepingPlaces() + " | " + camper.isHasKitchen();
-        if (vehicle instanceof Trailer trailer) return s + " | " + trailer.getTrailerType() + " | " + trailer.getMaxLoadKg();
-        if (vehicle instanceof Truck truck) return s + " | " + truck.getMaxLoadKg();
+        if (vehicle instanceof LuxuryCar car) return s + " | " + "Seats: " + car.getNumberOfSeats();
+        if (vehicle instanceof Camper camper) return s + " | " + "Sleeping: " + camper.getSleepingPlaces() + " | " + "has kitchen: " + camper.isHasKitchen();
+        if (vehicle instanceof Trailer trailer) return s + " | " + "Type: " + trailer.getTrailerType() + " | " + "Load: " +trailer.getMaxLoadKg();
+        if (vehicle instanceof Truck truck) return s + " | " + "Load: " + truck.getMaxLoadKg();
 
         return s;
     }
 
     private String formatContract(Contract contract) {
-        return contract.getStartingDate() + " | " +
-                contract.getEndingDate() + " | " +
-                formatPerson(contract.getPerson()) + " | " +
-                formatVehicle(contract.getVehicle());
+        return "Start: " + contract.getStartingDate() + " | " +
+                "End: " + contract.getEndingDate() + " | " +
+                "Person: " + formatPerson(contract.getPerson()) + " | " +
+                "Vehicle: " + formatVehicle(contract.getVehicle());
     }
 
     public ArrayList<Person> getCustomerList() {
