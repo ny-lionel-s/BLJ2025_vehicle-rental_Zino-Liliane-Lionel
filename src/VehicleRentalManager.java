@@ -3,6 +3,7 @@ import vehicles.LuxuryCar;
 import vehicles.Trailer;
 import vehicles.Truck;
 import vehicles.Vehicle;
+import vehicles.SmallCar;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,6 +19,36 @@ public class VehicleRentalManager {
         denyList = new ArrayList<>();
         vehicles = new ArrayList<>();
         contracts = new ArrayList<>();
+
+        customerList.add(new Person("Luca", "Meier", LocalDate.of(1998, 5, 14)));
+        customerList.add(new Person("Sofia", "Keller", LocalDate.of(2001, 11, 2)));
+        customerList.add(new Person("Noah", "Brunner", LocalDate.of(1995, 8, 21)));
+        customerList.add(new Person("Emma", "Fischer", LocalDate.of(2003, 3, 9)));
+        customerList.add(new Person("Leon", "Weber", LocalDate.of(1999, 12, 30)));
+        customerList.add(new Person("Mia", "Baumann", LocalDate.of(2000, 7, 17)));
+
+        vehicles.add(new Camper("Hymer", "Hymermobil", "ZH1001", 21, 220.0, true, 4, true));
+        vehicles.add(new Camper("VW", "California", "ZH1002", 21, 180.0, true, 4, true));
+
+        vehicles.add(new SmallCar("Opel", "Corsa", "ZH1101", 18, 70.0, true, 5, true));
+        vehicles.add(new SmallCar("Fiat", "500", "ZH1102", 18, 65.0, true, 4, true));
+        vehicles.add(new SmallCar("Hyundai", "i10", "ZH1103", 18, 68.0, true, 5, true));
+        vehicles.add(new SmallCar("Suzuki", "Swift", "ZH1104", 18, 72.0, true, 5, true));
+
+        vehicles.add(new LuxuryCar("Mercedes", "S-Klasse", "ZH2001", 25, 250.0, true, 5, true));
+        vehicles.add(new LuxuryCar("BMW", "Z4 Cabriolet", "ZH2002", 25, 210.0, true, 2, true));
+        vehicles.add(new LuxuryCar("Mazda", "MX5 Cabriolet", "ZH2003", 23, 160.0, true, 2, true));
+        vehicles.add(new LuxuryCar("BMW", "i8", "ZH2004", 25, 280.0, true, 2, true));
+
+        vehicles.add(new Truck("Mercedes", "Vito", "ZH3001", 21, 140.0, true, 1200.0));
+        vehicles.add(new Truck("VW", "Crafter", "ZH3002", 21, 150.0, true, 1400.0));
+        vehicles.add(new Truck("Iveco", "Daily", "ZH3003", 21, 160.0, true, 1800.0));
+        vehicles.add(new Truck("Opel", "Combo E", "ZH3004", 21, 130.0, true, 800.0));
+        vehicles.add(new Truck("VW", "e-Crafter", "ZH3005", 21, 170.0, true, 1300.0));
+
+        vehicles.add(new Trailer("Böckmann", "Hochlader", "ZH4001", 18, 60.0, true, "Heissluftballon", 2000.0));
+        vehicles.add(new Trailer("Böckmann", "Bootsanhänger", "ZH4002", 18, 55.0, true, "Boot", 1800.0));
+        vehicles.add(new Trailer("Böckmann", "Tieflader", "ZH4003", 18, 45.0, true, "Velos", 750.0));
     }
 
     void createPerson(String firstName, String lastName, LocalDate birthYear) {
@@ -44,19 +75,23 @@ public class VehicleRentalManager {
         denyList.remove(p);
     }
 
-    void createCamper(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, int sleepingPlaces, boolean hasKitchen) {
+    void createCamper(String brand, String model, String licensePlate, int minDriverAge,
+                      double rentalPricePerDay, boolean available, int sleepingPlaces, boolean hasKitchen) {
         vehicles.add(new Camper(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, sleepingPlaces, hasKitchen));
     }
 
-    void createCar(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, int numberOfSeats, boolean automaticTransmission) {
+    void createCar(String brand, String model, String licensePlate, int minDriverAge,
+                   double rentalPricePerDay, boolean available, int numberOfSeats, boolean automaticTransmission) {
         vehicles.add(new LuxuryCar(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, numberOfSeats, automaticTransmission));
     }
 
-    void createTrailer(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, String trailerType, double maxLoadKg) {
+    void createTrailer(String brand, String model, String licensePlate, int minDriverAge,
+                       double rentalPricePerDay, boolean available, String trailerType, double maxLoadKg) {
         vehicles.add(new Trailer(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, trailerType, maxLoadKg));
     }
 
-    void createTruck(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, double maxLoadKg) {
+    void createTruck(String brand, String model, String licensePlate, int minDriverAge,
+                     double rentalPricePerDay, boolean available, double maxLoadKg) {
         vehicles.add(new Truck(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, maxLoadKg));
     }
 
@@ -85,7 +120,9 @@ public class VehicleRentalManager {
 
     private boolean hasLeaseCollision(Vehicle vehicle, LocalDate start, LocalDate end) {
         for (Contract c : contracts) {
-            if (c.getVehicle().equals(vehicle) && c.getStartingDate().isBefore(end) && c.getEndingDate().isAfter(start)) {
+            if (c.getVehicle().equals(vehicle)
+                    && c.getStartingDate().isBefore(end)
+                    && c.getEndingDate().isAfter(start)) {
                 return true;
             }
         }

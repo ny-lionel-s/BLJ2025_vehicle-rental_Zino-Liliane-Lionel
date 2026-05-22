@@ -4,7 +4,7 @@ import java.util.UUID;
 
 public class SmallCar extends Vehicle {
     private int numberOfSeats;
-    private double Price;
+
 
     public SmallCar(String brand, String model, String licensePlate,
         int minDriverAge, double rentalPricePerDay, boolean available,
