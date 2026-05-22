@@ -40,7 +40,6 @@ classDiagram
     }
 
     class Vehicle {
-        <<abstract>>
         +vehicleId: UUID
         +brand: String
         +model: String
@@ -82,7 +81,7 @@ classDiagram
     VehicleRentalManager --> Contract : erstellt
     TUI --> VehicleRentalManager : benutzt
 
-    Contract --> Person : gehört zu
+    Contract --> Person : gehï¿½rt zu
     Contract --> Vehicle : mietet
 
     Vehicle <|-- SmallCar
