@@ -49,32 +49,33 @@ public class VehicleRentalManager {
         vehicles.add(new Trailer("Böckmann", "Hochlader", "ZH4001", 18, 60.0, true, "Heissluftballon", 2000.0));
         vehicles.add(new Trailer("Böckmann", "Bootsanhänger", "ZH4002", 18, 55.0, true, "Boot", 1800.0));
         vehicles.add(new Trailer("Böckmann", "Tieflader", "ZH4003", 18, 45.0, true, "Velos", 750.0));
+
+
+
     }
-
-
     void addPersonToCustomerList(Person p) {
-        customerList.add(p);
-    }
+        customerList.add(p);    }
+
 
     void removePersonFromCustomerList(Person p) {
-        customerList.remove(p);
-    }
+        customerList.remove(p);    }
+
 
     void addPersonToDenylist(Person p) {
         p.setDenylisted(true);
         if (!denyList.contains(p)) {
-            denyList.add(p);
-        }
+            denyList.add(p);    }
+
     }
 
     void removePersonFromDenylist(Person p) {
         p.setDenylisted(false);
-        denyList.remove(p);
-    }
+        denyList.remove(p);    }
+
 
     void addVehicleToVehicles(Vehicle v) {
-        vehicles.add(v);
-    }
+        vehicles.add(v);    }
+
 
     void removeVehicleFromVehicles(Vehicle v) {
         for (Contract c : contracts) {
@@ -83,13 +84,13 @@ public class VehicleRentalManager {
                 return;
             }
         }
-        vehicles.remove(v);
-    }
+        vehicles.remove(v);    }
+
 
     Contract createContract(LocalDate startingDate, LocalDate endingDate, Person person, Vehicle vehicle) throws Exception {
         if (hasLeaseCollision(vehicle, startingDate, endingDate)) {
-            throw new Exceptions.LeaseLengthCollisionException("Vehicle is already rented during this period.");
-        }
+            throw new Exceptions.LeaseLengthCollisionException("Vehicle is already rented during this period.");    }
+
         Contract contract = new Contract(startingDate, endingDate, person, vehicle);
         contracts.add(contract);
         return contract;
@@ -107,8 +108,8 @@ public class VehicleRentalManager {
     }
 
     void removeContract(Contract c) {
-        contracts.remove(c);
-    }
+        contracts.remove(c);    }
+
 
     void printCustomerList() {
         if (customerList.isEmpty()) {
@@ -116,8 +117,8 @@ public class VehicleRentalManager {
             return;
         }
         for (int i = 0; i < customerList.size(); i++) {
-            System.out.println(i + ": " + formatPerson(customerList.get(i)));
-        }
+            System.out.println(i + ": " + formatPerson(customerList.get(i)));    }
+
     }
 
     void printDenyList() {
@@ -126,8 +127,8 @@ public class VehicleRentalManager {
             return;
         }
         for (int i = 0; i < denyList.size(); i++) {
-            System.out.println(i + ": " + formatPerson(denyList.get(i)));
-        }
+            System.out.println(i + ": " + formatPerson(denyList.get(i)));    }
+
     }
 
     void printVehicles() {
@@ -136,8 +137,8 @@ public class VehicleRentalManager {
             return;
         }
         for (int i = 0; i < vehicles.size(); i++) {
-            System.out.println(i + ": " + formatVehicle(vehicles.get(i)));
-        }
+            System.out.println(i + ": " + formatVehicle(vehicles.get(i)));    }
+
     }
 
     void printContractList() {
@@ -146,16 +147,16 @@ public class VehicleRentalManager {
             return;
         }
         for (int i = 0; i < contracts.size(); i++) {
-            System.out.println(i + ": " + formatContract(contracts.get(i)));
-        }
+            System.out.println(i + ": " + formatContract(contracts.get(i)));    }
+
     }
 
     private String formatPerson(Person person) {
         return "ID: " + person.getPersonId() + " | " +
                 "Last Name: " + person.getLastName() + " | " +
                 "First Name: " + person.getFirstName() + " | " +
-                "Birthday: " + person.getBirthYear();
-    }
+                "Birthday: " + person.getBirthYear();    }
+
 
     private String formatVehicle(Vehicle vehicle) {
         String s = "ID: " + vehicle.getVehicleId() + " | " +
@@ -179,8 +180,8 @@ public class VehicleRentalManager {
         return "Start: " + contract.getStartingDate() + " | " +
                 "End: " + contract.getEndingDate() + " | " +
                 "Person: " + formatPerson(contract.getPerson()) + " | " +
-                "Vehicle: " + formatVehicle(contract.getVehicle());
-    }
+                "Vehicle: " + formatVehicle(contract.getVehicle());    }
+
 
     public ArrayList<Person> getCustomerList() {
         return customerList;

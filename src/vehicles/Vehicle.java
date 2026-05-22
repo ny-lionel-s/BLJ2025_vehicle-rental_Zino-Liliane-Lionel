@@ -10,9 +10,9 @@ public class Vehicle {
     private int minDriverAge;
     private double rentalPricePerDay;
     private boolean available;
-    private int maxLeaseDays;
+    private int maxLeaseDays = 30;
 
-    public Vehicle(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available) {
+    public Vehicle(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available, int maxLeaseDays) {
         this.vehicleId = UUID.randomUUID();
         this.brand = brand;
         this.model = model;
@@ -20,6 +20,10 @@ public class Vehicle {
         this.minDriverAge = minDriverAge;
         this.rentalPricePerDay = rentalPricePerDay;
         this.available = available;
+        this.maxLeaseDays = maxLeaseDays;
+    }
+    public Vehicle(String brand, String model, String licensePlate, int minDriverAge, double rentalPricePerDay, boolean available) {
+        this(brand, model, licensePlate, minDriverAge, rentalPricePerDay, available, 30);
     }
 
 
@@ -95,3 +99,5 @@ public class Vehicle {
 
 
 }
+
+
